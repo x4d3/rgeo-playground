@@ -9,3 +9,5 @@ gem "rgeo-shapefile"
 gem "rspec"
 gem "rubyzip"
 gem "standard"
+
+gem "pry"

@@ -8,6 +8,8 @@ require "open-uri"
 require_relative "shapefile_helper"
 require_relative "cli"
 
+require "pry"
+
 raise "RGeo::Geos is not supported" unless RGeo::Geos.supported?
 puts "preferred_native_interface #{RGeo::Geos.preferred_native_interface}"
 puts "rgeo-proj4 version #{RGeo::Proj4::VERSION}"
@@ -54,8 +56,7 @@ ShapefileHelper.open(path: file_path, factory: paris_lambert_factory, file_filte
       }
     }.to_json
 
-
     puts geo_json
-
+    binding.pry
   end
 end
