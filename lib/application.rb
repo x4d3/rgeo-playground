@@ -8,8 +8,6 @@ require "open-uri"
 require_relative "shapefile_helper"
 require_relative "cli"
 
-require "pry"
-
 raise "RGeo::Geos is not supported" unless RGeo::Geos.supported?
 puts "preferred_native_interface #{RGeo::Geos.preferred_native_interface}"
 puts "rgeo-proj4 version #{RGeo::Proj4::VERSION}"

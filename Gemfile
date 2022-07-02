@@ -11,3 +11,4 @@ gem "rubyzip"
 gem "standard"
 
 gem "pry"
+gem "pry-byebug"
