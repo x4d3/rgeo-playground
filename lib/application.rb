@@ -26,6 +26,7 @@ paris_lambert_proj4 = RGeo::CoordSys::Proj4.create(paris_lambert_definition)
 raise "invalid paris_lambert_definition" unless paris_lambert_proj4
 
 paris_lambert_factory = RGeo::Cartesian.factory(srid: 2154, proj4: paris_lambert_proj4)
+ws84_factory = RGeo::Cartesian.factory(srid: 4326, proj4: ws84_proj4)
 
 paris_lambert_to_ws84_crs = RGeo::CoordSys::CRSStore.get(paris_lambert_proj4, ws84_proj4)
 
@@ -42,5 +43,19 @@ ShapefileHelper.open(path: file_path, factory: paris_lambert_factory, file_filte
     title = record.attributes["DESCR"]
     geometry = record.geometry
     puts "#{notation} #{title} #{geometry}"
+    transformed = paris_lambert_to_ws84_crs.transform(geometry, ws84_factory)
+
+    geo_json = {
+      type: "Feature",
+      geometry: RGeo::GeoJSON.encode(transformed),
+      properties: {
+        stroke: "#000000",
+        fill: "#0B699E"
+      }
+    }.to_json
+
+
+    puts geo_json
+
   end
 end
